@@ -84,69 +84,83 @@ public class lab5autocheck {
 			 
 			 //STEP 4: 
 //			  Select Hyundai and select doc3 as shown in picture.
-			 WebElement MultiSelectBox = driver.findElement(By.id("multiselect1"));
+			 WebElement MultiSelectBox = driver.findElement(By.xpath("//select[contains(@id,'multiselect')]"));
 			 js.executeScript("arguments[0].scrollIntoView();", MultiSelectBox);
-			 Select selctVeh = new Select(driver.findElement(By.id("multiselect1")));
+			 Select selctVeh = new Select(driver.findElement(By.xpath("//select[contains(@id,'multiselect')]")));
 			 selctVeh.selectByVisibleText("Hyundai");
 			 
-			 Select drpDoc = new Select(driver.findElement(By.id("drop1")));
-			 drpDoc.selectByVisibleText("doc 3");
+			 Select dropD = new Select(driver.findElement(By.xpath("//select[contains(@id,'drop')]")));
+			 dropD.selectByVisibleText("doc 3");
 			 
-			 driver.findElement(By.xpath("//input[@id='textbox1']")).clear();
-			 driver.findElement(By.xpath("//input[@id='textbox1']")).sendKeys("Kia kr rhy ho");
-			 
-			 driver.findElement(By.xpath("//button[@id='but2']")).click();
+			 WebElement input = driver.findElement(By.xpath("//input[@value='Selenium WebDriver']"));
+			 (input).clear();
+			 js.executeScript("arguments[0].scrollIntoView();", input);
+			 (input).sendKeys("Kia kr rhy ho");
+			 driver.findElement(By.xpath("//button[text()='Button2']")).click();
 			 driver.findElement(By.xpath("//button[text()='Submit']")).click();
 			 driver.findElement(By.xpath("//button[text()='Login']")).click();
 			 driver.findElement(By.xpath("//button[text()='Register']")).click();
-			 driver.findElement(By.xpath("//input[@id='alert2']")).click();
+			 driver.findElement(By.xpath("//input[@value='ClickAfterTextDissappears']")).click();
 			 driver.switchTo().alert().accept();
-//			 
-//			 driver.findElement(By.xpath("//a[text()='Open a popup window']")).click();
-//			 
-//			 String defaultFrame = driver.getWindowHandle();
-//			 for(String openNewWindow : driver.getWindowHandles()) {
-//				 driver.switchTo().window(openNewWindow);
-//			 }
-//			 String getVar1 = driver.findElement(By.xpath("//p[@id='para1']")).getText();
-//			 String getVar2 = driver.findElement(By.xpath("//p[@id='para2']")).getText();
-//			 System.out.println(getVar1);
-//			 System.out.println(getVar2);
-//			 Thread.sleep(2000);
-//			 driver.close();
-//			 driver.switchTo().window(defaultFrame);
-//			 driver.findElement(By.xpath("//button[text()='Try it']")).click();
-//			 
-//			 Actions act = new Actions(driver);
-//
-//			WebElement ele = driver.findElement(By.xpath("//button[@ondblclick='dblclickAlert()']")); 
-//			act.doubleClick(ele).perform();
-//			driver.switchTo().alert().accept();
-//			
-//			driver.findElement(By.xpath("//button[text()='Check this']")).click();
-//			
-//			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='dte']"))).click();
-//			
-//			//Step 5
-//			driver.findElement(By.xpath("//input[@id='radio1']")).click();
-//			driver.findElement(By.xpath("//input[@id='alert1']")).click();
-//			driver.switchTo().alert().accept();
-//			
-//			driver.findElement(By.xpath("//input[@id='checkbox1']")).click();
-//			driver.findElement(By.xpath("//input[@id='checkbox2']")).click();
-//			WebElement readThisText = driver.findElement(By.xpath("//input[@id='rotb']"));
-//			String txt = readThisText.getAttribute("value");
-//			System.out.println(txt);
-//			driver.findElement(By.xpath("//input[@id='prompt']")).click();
-//			driver.switchTo().alert().sendKeys("Salman");
-//			driver.switchTo().alert().accept();
-//			driver.findElement(By.xpath("//input[@id='confirm']")).click();
-//			driver.switchTo().alert().accept();
-//			
-//			driver.findElement(By.xpath("//input[@class='classone']")).sendKeys("Classone");
-//			driver.findElement(By.xpath("//input[@value='Car']")).click();
-//			driver.findElement(By.xpath("//input[@value='Bag']")).click();
-//			driver.findElement(By.xpath("//input[@value='Book']")).click();
+			 
+			 driver.findElement(By.xpath("//a[text()='Open a popup window']")).click();
+			 
+			 String defaulwinHandle = driver.getWindowHandle();
+			 for(String NewWinHandle : driver.getWindowHandles()) {
+				 driver.switchTo().window(NewWinHandle);
+			 }
+			 String text1 = driver.findElement(By.xpath("//p[contains(@class,'main')]")).getText();
+			 String text2 = driver.findElement(By.xpath("//p[contains(@class,'sub')]")).getText();
+			 System.out.println(text1);
+			 System.out.println(text2);
+			 Thread.sleep(2000);
+			 driver.close();
+			 driver.switchTo().window(defaulwinHandle);
+			 driver.findElement(By.xpath("//input[@id='uploadfile']")).sendKeys("C:\\Users\\4068\\Pictures\\Capture12.PNG");
+			 driver.findElement(By.xpath("//button[text()='Try it']")).click();
+			 
+			 Actions act = new Actions(driver);
+
+			WebElement btn = driver.findElement(By.xpath("//button[@ondblclick='dblclickAlert()']")); 
+			act.doubleClick(btn).perform();
+			driver.switchTo().alert().accept();
+			
+			driver.findElement(By.xpath("//button[text()='Check this']")).click();
+			//wait
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='dte']"))).click();
+			
+			//STEP 5:
+			//Now, Select your gender, click on the button ‘ClickToGetAlert’ handle alert
+			//Select color blue an deselect orange.
+
+			driver.findElement(By.xpath("//input[@value='male']")).click();
+			driver.findElement(By.xpath("//input[@value='ClickToGetAlert']")).click();
+			driver.switchTo().alert().accept();
+			
+			driver.findElement(By.xpath("//input[@value='orange']")).click();
+			driver.findElement(By.xpath("//input[@value='blue']")).click();
+			WebElement readThisText = driver.findElement(By.xpath("//input[@id='rotb']"));
+			String txt = readThisText.getAttribute("value");
+			System.out.println(txt);
+			driver.findElement(By.xpath("//input[@id='prompt']")).click();
+			//Thread.sleep(2000);
+			driver.switchTo().alert().sendKeys("Khurram bajwa");
+			//Thread.sleep(2000);
+			driver.switchTo().alert().accept();
+			driver.findElement(By.xpath("//input[@id='confirm']")).click();
+			//Thread.sleep(2000);
+			driver.switchTo().alert().accept();
+			//Thread.sleep(2000);
+			WebElement vehicle = driver.findElement(By.xpath("//input[@class='classone']"));
+			js.executeScript("arguments[0].scrollIntoView();", vehicle);
+			(vehicle).sendKeys("Classone");
+			driver.findElement(By.xpath("//input[@value='Car']")).click();
+			driver.findElement(By.xpath("//input[@value='Bag']")).click();
+			driver.findElement(By.xpath("//input[@value='Book']")).click();
+			WebElement doubleClickBtn = driver.findElement(By.xpath("//p[@id='testdoubleclick']")); 
+			act.doubleClick(doubleClickBtn).perform();
+			driver.findElement(By.xpath("//a[text()='Gmail']")).click();
+			
 		}
 
 }
